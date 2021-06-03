@@ -1,9 +1,10 @@
 <label>Server Name</label>
+<!-- data binding learning -->
 <!-- Not two-way binding, changing input here will change the serverName. But if serverName were changed by something else, it wouldn't reflect here. -->
 <!-- <input type="text" class="form-control" (input)="onUpdateServerName($event)" /> -->
 
 <!-- Two-way binding, changing input here will change the serverName. If serverName were changed by something else, it would reflect the change here as well. -->
-<input type="text" class="form-control" [(ngModel)]="serverName"/>
+<input type="text" class="form-control" [(ngModel)]="serverName" />
 <p>{{ serverName }}</p>
 <button
   class="btn btn-primary"
@@ -12,9 +13,26 @@
 >
   Add Server
 </button>
-<p>{{ serverCreationStatus }}</p>
+<!-- directives learning -->
+<!-- <p>{{ serverCreationStatus }}</p> -->
+<p *ngIf="serverCreated; else noServer">Server created, server name is {{ serverName }}!</p>
+<ng-template #noServer><p>No server is created!</p></ng-template>
 <!-- <p [innerText]="allowNewServer"></p> -->
-<input type="text" class='form-control' [(ngModel)]="username">
-<button class="btn btn-primary" [disabled]="!username" (click)="onClickButtonUserName()">Reset Username</button>
-<app-server></app-server>
-<app-server></app-server>
+<input type="text" class="form-control" [(ngModel)]="username" />
+<button
+  class="btn btn-primary"
+  [disabled]="!username"
+  (click)="onClickButtonUserName()"
+>
+  Reset Username
+</button>
+<app-server *ngFor="let server of servers"></app-server>
+<h2>Assignment 3</h2>
+<button class="btn btn-primary" (click)="onClickDisplayDetails()">Display Details</button>
+<p *ngIf="shouldDisplay">{{secretContent}}</p>
+<h5>Logging</h5>
+<ul>
+    <li *ngFor="let log of displayLogs; index as i" [ngClass]="{after4th: i > 4}">{{i}}:{{log}}</li>
+</ul>
+
+

@@ -1,2 +1,20 @@
+<label>Server Name</label>
+<!-- Not two-way binding, changing input here will change the serverName. But if serverName were changed by something else, it wouldn't reflect here. -->
+<!-- <input type="text" class="form-control" (input)="onUpdateServerName($event)" /> -->
+
+<!-- Two-way binding, changing input here will change the serverName. If serverName were changed by something else, it would reflect the change here as well. -->
+<input type="text" class="form-control" [(ngModel)]="serverName"/>
+<p>{{ serverName }}</p>
+<button
+  class="btn btn-primary"
+  [disabled]="!allowNewServer"
+  (click)="onCreateServer()"
+>
+  Add Server
+</button>
+<p>{{ serverCreationStatus }}</p>
+<!-- <p [innerText]="allowNewServer"></p> -->
+<input type="text" class='form-control' [(ngModel)]="username">
+<button class="btn btn-primary" [disabled]="!username" (click)="onClickButtonUserName()">Reset Username</button>
 <app-server></app-server>
 <app-server></app-server>
